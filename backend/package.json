@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon app.js",
+    "start": "node app.js",
     "build": "npm install --prefix ./frontend && npm run build --prefix ./frontend && npm install"
   },
   "keywords": [],
