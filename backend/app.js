@@ -9,7 +9,10 @@ import transactionRoutes from "./Routers/Transactions.js";
 import userRoutes from "./Routers/userRouter.js";
 
 import path from "path";
-
+import { fileURLToPath } from "url";
+const __filename=fileURLToPath(import.meta.url)
+const __dirname=path.dirname(__filename)
+console.log(__dirname)
 dotenv.config({ path: "./config/config.env" });
 
 const app = express();
@@ -45,6 +48,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Router
 app.use("/api/v1", transactionRoutes);
 app.use("/api/auth", userRoutes);
+
+
+app.use(express.static(path.join(__dirname,'/frontend/build')))
+
+app.get("*",(req,res) =>
+  res.sendFile(path.join(__dirname,'frontend/build/index.html'))
+);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
